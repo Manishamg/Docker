@@ -2,7 +2,8 @@ pipeline{
     agent any
     environment {
         DOCKERHUB_USERNAME = "manisha265"
-        DOCKERHUB_PASSWORD = "Mmani@265"}
+        DOCKERHUB_PASSWORD = "Mmani@265"
+        }
     stages{
         stage ("httpd image pull"){
             steps{
@@ -18,7 +19,8 @@ pipeline{
             steps {
                 script {
                     sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD} "
-                    sh "docker push imageapache1"
+                    sh 'docker tag imageapache1 manisha265/imageapache1:V1'
+                    sh "docker push manisha265/imageapache1"
                 }
             }
 
