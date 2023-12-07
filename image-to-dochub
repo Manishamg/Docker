@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage ("httpd image pull"){
             steps{
-            sh 'docker run -d --name imageapache1 httpd:latest'
+            sh 'docker run -d --name image1 nginx:latest'
             }
         }
         stage ('docker images'){
@@ -19,12 +19,12 @@ pipeline{
             steps {
                 script {
                     sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD} "
-                    sh "docker tag imageapache1 manisha265/docker:latest"
+                    sh "docker tag image1 manisha265/docker:latest"
                     sh "docker push manisha265/docker:latest"
                 }
     }}}
 post{
-    always{
-     sh 'docker rm -f imageapache1'
+    failure{
+     sh 'docker rm -f image1'
 }}
 }
