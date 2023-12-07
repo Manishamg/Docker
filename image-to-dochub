@@ -19,8 +19,8 @@ pipeline{
             steps {
                 script {
                     sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD} "
-                    sh 'docker tag imageapache1 manisha265/docker:V1'
-                    sh "docker push manisha265/docker"
+                    sh 'docker tag imageapache1 manisha265/docker:V2'
+                    sh "docker push manisha265/docker:V2"
                 }
     }}}
 post{
