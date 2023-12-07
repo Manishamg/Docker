@@ -17,17 +17,17 @@ pipeline{
                     sh 'docker exec imageapache apt-get update'
                     sh 'docker exec imageapache apt-get install curl'
                     sh 'docker exec imageapache apt-get install -y unzip'
-                    sh 'docker exec imageapache apt-get install -y sudo'
+                    //sh 'docker exec imageapache apt-get install -y sudo'
                     sh 'docker exec imageapache curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
                     sh 'docker exec imageapache unzip awscliv2.zip'
-                    sh 'docker exec imageapache sudo ./aws/install'
+                    sh 'docker exec imageapache ./aws/install'
                     sh 'docker exec imageapache aws-cli --version'
                 }
             }
         }
     }
-post{
+/*post{
     always{
      sh 'docker rm -f imageapache'
-}}
+}}*/
 }
