@@ -21,7 +21,7 @@ pipeline{
                     sh 'docker exec imageapache curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
                     sh 'docker exec imageapache unzip awscliv2.zip'
                     sh 'docker exec imageapache ./aws/install'
-                    sh 'docker exec imageapache aws-cli --version'
+                    sh 'docker exec imageapache /usr/local/bin/aws --version'
                 }
             }
         }
