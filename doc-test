@@ -1,0 +1,27 @@
+pipeline{
+    agent any
+    stages{
+        stage ("httpd image pull"){
+            steps{
+            sh 'docker run -d --name imagehttpd httpd'
+            }
+        }
+        stage ('docker images'){
+            steps{
+                sh 'docker images'
+            }
+        }
+        stage ("entering into container"){
+            steps{
+                sh "docker exec -it imagehttpd /bin/bash"
+                sh 'apt-get update'
+                script{
+                    sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" '
+                    sh 'unzip awscliv2.zip '
+                    sh 'sudo ./aws/install '
+                    sh 'aws-cli --version'
+                }
+            }
+        }
+    }
+}
