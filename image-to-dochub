@@ -1,0 +1,27 @@
+pipeline{
+    agent any
+    stages{
+        stage ("httpd image pull"){
+            steps{
+            sh 'docker run -d --name imageapache1 httpd'
+            }
+        }
+        stage ('docker images'){
+            steps{
+                sh 'docker images'
+            }
+        }
+        stage('Pushing image to Docker-Hub') {
+            steps {
+                script {
+                    sh "docker login -u "manisha265" -p "Mmani@265" "
+                    sh "docker push imageapache1"
+                }
+            }
+
+    }
+post{
+    always{
+     sh 'docker rm -f imageapache1'
+}}
+}
