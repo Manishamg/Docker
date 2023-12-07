@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage ("httpd image pull"){
             steps{
-            sh 'docker run -d --name imagehttpd httpd'
+            sh 'docker run -d --name imageapache httpd'
             }
         }
         stage ('docker images'){
@@ -13,7 +13,7 @@ pipeline{
         }
         stage ("entering into container"){
             steps{
-                sh "docker exec -it imagehttpd /bin/bash"
+                sh "docker exec imageapache /bin/bash"
                 sh 'apt-get update'
                 script{
                     sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" '
@@ -24,4 +24,8 @@ pipeline{
             }
         }
     }
+post{
+    always{
+     sh 'docker rm -f imageapache'
+}}
 }
