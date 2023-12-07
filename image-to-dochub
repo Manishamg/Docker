@@ -26,5 +26,5 @@ pipeline{
 /*post{
     failure{
      sh 'docker rm -f nginxname'
-}}
-}*/
+}}*/
+}
