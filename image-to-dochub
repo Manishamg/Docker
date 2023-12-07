@@ -14,7 +14,7 @@ pipeline{
         stage('Pushing image to Docker-Hub') {
             steps {
                 script {
-                    sh "docker login -u "manisha265" -p "Mmani@265" "
+                    sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD} "
                     sh "docker push imageapache1"
                 }
             }
