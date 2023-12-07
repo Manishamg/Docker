@@ -11,7 +11,18 @@ pipeline{
                 sh 'docker images'
             }
         }
-        stage ("entering into container"){
+        stage("Run Commands in Container") {
+            steps {
+                script {
+                    sh 'docker exec imageapache apt-get update'
+                    sh 'docker exec imageapache curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
+                    sh 'docker exec imageapache unzip awscliv2.zip'
+                    sh 'docker exec imageapache sudo ./aws/install'
+                    sh 'docker exec imageapache aws-cli --version'
+                }
+            }
+        }
+        /*stage ("entering into container"){
             steps{
                 sh "docker exec imageapache /bin/bash"
                 sh 'apt-get update'
@@ -22,7 +33,7 @@ pipeline{
                     sh 'aws-cli --version'
                 }
             }
-        }
+        }*/
     }
 post{
     always{
