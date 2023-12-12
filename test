@@ -1,0 +1,15 @@
+pipeline{
+    agent any
+    stages{
+        stage ('docker images'){
+            steps{
+                sh 'docker images'
+            }
+        }
+    }
+post{
+    always{
+     echo 'successssssssssssss'
+}
+}
+}
