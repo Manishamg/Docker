@@ -9,6 +9,7 @@ pipeline{
             }}
         stage ('docker images'){
             steps{
+                sh "su - jenkins"
                 sh 'yum install -y git'
             }
         }
